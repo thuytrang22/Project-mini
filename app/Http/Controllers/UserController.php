@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -11,16 +11,8 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            'full_name' => 'required',
-            'birthday' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
-        User::create($request->all());
-        return redirect()->route('users.index')->with('success', 'User has been created successfully.');
+        //
     }
 }

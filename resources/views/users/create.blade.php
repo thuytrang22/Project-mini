@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="from-group">
-                        <strong>Full Name:</strong>
+                        <strong>Full Name:</strong><br/>
                         <label>
                             <input type="text" name="full_name" class="from-control" placeholder="User Name" >
                         </label>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="from-group">
-                        <strong>Birthday:</strong>
+                        <strong>Birthday:</strong><br/>
                         <label>
                             <input type="date" name="birthday" class="from-control" placeholder="Date Of Birth">
                         </label>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="from-group">
-                        <strong>Email:</strong>
+                        <strong>Email:</strong><br/>
                         <label>
                             <input type="email" name="email" class="from-control" placeholder="Email">
                         </label>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="from-group">
-                        <strong>Phone:</strong>
+                        <strong>Phone:</strong><br/>
                         <label>
                             <input type="number" name="phone" class="from-control" placeholder="Phone">
                         </label>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="from-group">
-                        <strong>Address</strong>
+                        <strong>Address:</strong><br/>
                         <label>
                             <input type="text" name="address" class="from-control" placeholder="Address">
                         </label>
