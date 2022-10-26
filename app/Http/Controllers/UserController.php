@@ -11,9 +11,9 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(UserRequest $form)
+    public function store(UserRequest $request)
     {
-        Post::create($form->validatedInputs());
+       /* Post::create($form->validatedInputs());*/
     }
 }
 

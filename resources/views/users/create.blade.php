@@ -6,9 +6,9 @@
                 <div class="pull-left mb-2">
                     <h2>Add User</h2>
                 </div>
-                <form action="{{ route('users.create')  }}" method="POST">
+                <form action="{{ route('users.index')}}" method="POST">
                     <div class="pull-right">
-                        <a class="btn btn-primary" href={{ route('users.index')  }}>Back</a>
+                        <a class="btn btn-primary" href={{ route('users.index')}}>Back</a>
                     </div>
                 </form>
             </div>
@@ -25,7 +25,8 @@
                     <div class="from-group">
                         <strong>Full Name:</strong><br/>
                         <label>
-                            <input type="text" name="full_name" class="from-control" placeholder="User Name" >
+                            <input type="text" name="full_name" class="from-control" placeholder="User Name"
+                                   value="{{ old('full_name') }}">
                         </label>
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
@@ -36,7 +37,8 @@
                     <div class="from-group">
                         <strong>Birthday:</strong><br/>
                         <label>
-                            <input type="date" name="birthday" class="from-control" placeholder="Date Of Birth">
+                            <input type="date" name="birthday" class="from-control" placeholder="Date Of Birth"
+                                   value="{{ old('birthday') }}">
                         </label>
                         @error('birthday')
                         <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
@@ -47,7 +49,8 @@
                     <div class="from-group">
                         <strong>Email:</strong><br/>
                         <label>
-                            <input type="email" name="email" class="from-control" placeholder="Email">
+                            <input type="email" name="email" class="from-control" placeholder="Email"
+                                   value="{{ old('email') }}">
                         </label>
                         @error('email')
                         <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
@@ -58,7 +61,8 @@
                     <div class="from-group">
                         <strong>Phone:</strong><br/>
                         <label>
-                            <input type="number" name="phone" class="from-control" placeholder="Phone">
+                            <input type="number" name="phone" class="from-control" placeholder="Phone"
+                                   value="{{ old('phone') }}">
                         </label>
                         @error('phone')
                         <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
@@ -69,7 +73,8 @@
                     <div class="from-group">
                         <strong>Address</strong><br/>
                         <label>
-                            <input type="text" name="address" class="from-control" placeholder="Address">
+                            <input type="text" name="address" class="from-control" placeholder="Address"
+                                   value="{{ old('address') }}">
                         </label>
                         @error('address')
                         <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
