@@ -24,11 +24,17 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => 'required',
+            'full_name' => 'required|',
             'birthday' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
         ];
+    }
+    public function validatedInputs()
+    {
+        $keys = array_keys($this->rules());
+
+        return $this->only($keys);
     }
 }
