@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
     @if ( session('store'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Saved Successfully!</strong>User has been successfully saved
-            <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Saved Successfully!</strong>User has been successfully saved
+    <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+    </div>
     @endif
     <div class="card mb-5">
         <div class="card-body">
@@ -31,20 +31,20 @@
                 </thead>
                 <tbody>
                 @foreach
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->full_name}}</td>
-                        <td>{{$user->birthday}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->phone}}</td>
-                        <td>{{$user->address}}</td>
-                        <td>
-                            <a href="{{route('users.show'),['user'=>$user->id]}}" class="btn btn-sm"><i class="fas fa-eye"></i> </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{user->id}}</td>
+                    <td>{{$user->full_name}}</td>
+                    <td>{{$user->birthday}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->phone}}</td>
+                    <td>{{$user->address}}</td>
+                    <td>
+                        <a href="{{route('users.show'),['user'=>$user->id]}}" class="btn btn-sm"><i class="fas fa-eye"></i> </a>
+                    </td>
+                </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-@endsection
+    @endsection
