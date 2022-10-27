@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Customer
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 
-Route::get('/dashboard', function () {
-    return 'hello 12355';
-});
+
+
+
 
