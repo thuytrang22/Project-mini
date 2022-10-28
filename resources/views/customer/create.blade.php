@@ -13,23 +13,38 @@
 <body>
 <div class="container">
     <div class="col-md-6 mt-4 border-0">
-    <form method="POST" action="">
-        @csrf
-        <h1>Form add customer</h1>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Name</label>
-            <input type="text" name="name" class="form-control" id="exampleInputPassword1" placeholder="Type your name here..">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Phone number</label>
-            <input type="text" name="phone_number" class="form-control" id="exampleInputPassword1" placeholder="">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <form method="POST" action="{{route('customer.store')}}">
+            @csrf
+            <h1>Form add customer</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" name="email" value="{{old('email')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                @error('email')
+                <span style="color: red" role="alert">
+                    {{$message}}
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" name="name" value="{{old('name')}}" class="form-control" id="exampleInputPassword1" placeholder="Type your name here..">
+                @error('name')
+                <span style="color: red" role="alert">
+                    {{$message}}
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Phone number</label>
+                <input type="text" name="phone_number" value="{{old('phone_number')}}" class="form-control" id="exampleInputPassword1" placeholder="">
+                @error('phone_number')
+                <span style="color: red" role="alert">
+                    {{$message}}
+                </span>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </div>
 
