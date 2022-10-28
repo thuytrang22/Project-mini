@@ -45,6 +45,14 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $customer = Customer::find($id);
+
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required|min:10|max:12'
+        ];
+        $request->validate($rules);
+
         DB::beginTransaction();
         try {
             $query = $customer->update($request->all());
