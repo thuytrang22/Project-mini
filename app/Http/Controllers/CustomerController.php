@@ -37,4 +37,9 @@ class CustomerController extends Controller
             return redirect()->route('customer.index')->with('notification', 'User created failed');
         }
     }
+
+    public function edit($id,Customer $customer){
+        $customer = Customer::find($id);
+        return view('customer.edit',compact('customer'));
+    }
 }
