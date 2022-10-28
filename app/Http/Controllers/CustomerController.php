@@ -9,4 +9,7 @@ class CustomerController extends Controller
         $list_customers= $customer->getListUser();
         return view('customer.index',compact('list_customers'));
     }
+    public function create(){
+        return view('customer.create');
+    }
 }
