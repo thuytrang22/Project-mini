@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-6 mt-4 border-0">
-        <form method="POST" action="">
+    <div class="mt-4">
+        <form method="POST" action="{{route('customer.update', $customer->id)}}">
             @csrf
             <h1>Form edit customer</h1>
             <div class="form-group">

@@ -61,12 +61,15 @@
                                 <td>{{$customer->phone_number}}</td>
                                 <td>{{$customer->created_at}}</td>
                                 <td>
+                                    <form action="">
+                                        @method('put')
                                     <a href="#" class="view" id="view_icon" title="View" data-toggle="tooltip"><i
                                             class="material-icons">&#xE417;</i></a>
                                     <a href="{{route('customer.edit', $customer->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i
                                             class="material-icons">&#xE254;</i></a>
                                     <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
                                             class="material-icons">&#xE872;</i></a>
+                                    </form>
                                 </td>
                             </tr>
                     @endforeach

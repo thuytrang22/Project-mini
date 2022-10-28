@@ -19,6 +19,7 @@ Route::get('/customer',[CustomerController::class,'index'])->name('customer.inde
 Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
 Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');
 Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
 
 
 

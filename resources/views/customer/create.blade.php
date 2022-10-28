@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-6 mt-4 border-0">
+    <div class="mt-4">
         <form method="POST" action="{{route('customer.store')}}">
             @csrf
             <h1>Form add customer</h1>

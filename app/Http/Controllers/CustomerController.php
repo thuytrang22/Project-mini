@@ -26,7 +26,6 @@ class CustomerController extends Controller
         $request->validate($rules);
 
         DB::beginTransaction();
-
         try {
             $query = $customer->addUser($request);
             DB::commit();
@@ -38,8 +37,23 @@ class CustomerController extends Controller
         }
     }
 
-    public function edit($id,Customer $customer){
+    public function edit($id){
         $customer = Customer::find($id);
         return view('customer.edit',compact('customer'));
     }
-}
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        DB::beginTransaction();
+        try {
+            $query = $customer->update($request->all());
+            DB::commit();
+            return redirect()->route('customer.index')->with('notification', 'User has been updated successfully');
+        } catch (\Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+            return redirect()->route('customer.index')->with('notification', 'User updated failed');
+        }
+
+    }}
