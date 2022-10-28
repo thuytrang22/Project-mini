@@ -26,8 +26,9 @@ class CustomerController extends Controller
         $request->validate($rules);
 
         DB::beginTransaction();
+
         try {
-            $customer->addUser($request);
+            $query = $customer->addUser($request);
             DB::commit();
             return redirect()->route('customer.index')->with('notification', 'User has been created successfully');
         } catch (\Exception $e) {

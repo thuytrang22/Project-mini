@@ -23,11 +23,7 @@ class Customer extends Model
     }
 
     public function addUser($request){
-        $query = $this->create($request->all());
-        return $query;
-
-
-
+        $this->create($request->all());
     }
 
 }
