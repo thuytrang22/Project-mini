@@ -20,7 +20,7 @@ Route::get('/customer/create',[CustomerController::class,'create'])->name('custo
 Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');
 Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
 Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
-
+Route::get('/customer/destroy/{id}',[CustomerController::class,'destroy'])->name('customer.destroy');
 
 
 

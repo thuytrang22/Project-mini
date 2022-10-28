@@ -63,5 +63,18 @@ class CustomerController extends Controller
             DB::rollBack();
             return redirect()->route('customer.index')->with('notification', 'User updated failed');
         }
+    }
 
-    }}
+    public function destroy($id, Customer $customer){
+        DB::beginTransaction();
+        try {
+            $customer->deleteUser($id);
+            DB::commit();
+            return redirect()->route('customer.index')->with('notification', 'User has been deleted successfully');
+        } catch (\Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+            return redirect()->route('customer.index')->with('notification', 'User deleted failed');
+        }
+    }
+}

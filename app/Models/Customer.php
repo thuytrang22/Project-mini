@@ -26,4 +26,8 @@ class Customer extends Model
         $this->create($request->all());
     }
 
+    public function deleteUser($id)
+    {
+        $this->find($id)->delete();
+    }
 }
