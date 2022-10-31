@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Customer
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
+Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');
+Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+Route::get('/customer/destroy/{id}',[CustomerController::class,'destroy'])->name('customer.destroy');
 
-Route::get('/dashboard', function () {
-    return 'hello 12355';
-});
+
+
+
 
