@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="from-group">
-                    <strong>User Name:</strong>
+                    <strong>Full Name:</strong>
                     <input type="text" name="name" class="from-control" value="{{$user->full_name}}" placeholder="User Name">
                     @error('name')
                     <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
