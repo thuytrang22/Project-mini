@@ -27,6 +27,14 @@
                     </a>
                 </div>
             </div>
+            <form method="POST" class="col-auto ms-auto">
+                <div class="input-group">
+                    <input type="text" id="search" name="search" class="form-control " value="{{request()->search}}"
+                           placeholder="search name user ..."/>
+
+                    <button type="button" class="btn btn-secondary">Search</button>
+                </div>
+            </form>
         </div>
         <div class="card-body p-0">
             <table class="table table-striped table-hover m-0">
@@ -53,7 +61,7 @@
                         <td>
                             <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
                             <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
-                            <button class="btn btn-sm " type="button" data-url="{{route('$user.destroy',
+                            <button class="btn btn-sm " type="button" data-url="{{route('$users.destroy',
                             ['user'=>$user->id])}}">Delete</button>
                         </td>
                     </tr>
@@ -63,3 +71,53 @@
         </div>
     </div>
 @endsection
+@push('modal')
+    <div class="modal" tabindex="-1" id="modalDelate">
+        <div class=" modal-body">
+            <form action="#" method="post" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-trash"></i>
+                    </h5>
+                    <button class="btn-close" data-bs-dismis="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    @method('delete')
+                    <p>Are yuo sure it will br deleted</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss>Cancel</button>
+                    <button class="btn btn-danger" type="submit">Yes,Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endpush
+@push('js')
+    <script>
+        $(function (){
+            let modalDelete =new bootstrap.Modal($(#modalDelate));
+            $('.delete').click(function (){
+                let url = $(this).attr('data-url');
+                $('#modalDelete form').attr('action', url);
+                modalDelete.show();
+            })
+        })
+    </script>
+@endpush
+@push('js')
+    <script type="text/javascript">
+        var route = "{{ url('autocomplete-search') }}";
+        $('#search').typeahead({
+            source: function (query, process) {
+                return $.get(route, {
+                    query: query
+                }, function (data) {
+                    return process(data);
+                });
+            }
+        });
+    </script>
+@endpush
+
