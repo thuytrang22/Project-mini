@@ -49,19 +49,13 @@ class CustomerController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
-            'phone_number' => 'required|min:10|max:12'
+            'phone_number' => 'required|regex:/^\+{0,1}\d+$/'
         ];
         $request->validate($rules);
-
-        DB::beginTransaction();
-        try {
-            $query = $customer->update($request->all());
-            DB::commit();
+        $query = $customer->update($request->all());
+        if($query){
             return redirect()->route('customer.index')->with('notification', 'User has been updated successfully');
-        } catch (\Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
+        }else{
             return redirect()->route('customer.index')->with('notification', 'User updated failed');
         }
-
     }}
