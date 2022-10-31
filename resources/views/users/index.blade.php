@@ -6,6 +6,18 @@
             <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
         </div>
     @endif
+    @if ( session('update'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Update Successfully!</strong>User has been successfully update
+            <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+    @if ( session('destroy'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Delete Successfully!</strong>User has been successfully delete
+            <button class="btn-close" type="button" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
     <div class="card mb-5">
         <div class="card-body">
             <div class="row">
@@ -30,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach
+                @foreach($users as $user)
                     <tr>
                         <td>{{$user->id}}</td>
                         <td>{{$user->full_name}}</td>
@@ -39,7 +51,10 @@
                         <td>{{$user->phone}}</td>
                         <td>{{$user->address}}</td>
                         <td>
-                            <a href="{{route('users.show'),['user'=>$user->id]}}" class="btn btn-sm"><i class="fas fa-eye"></i> </a>
+                            <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
+                            <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
+                            <button class="btn btn-sm " type="button" data-url="{{route('$user.destroy',
+                            ['user'=>$user->id])}}">Delete</button>
                         </td>
                     </tr>
                 @endforeach
