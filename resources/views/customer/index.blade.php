@@ -45,7 +45,7 @@
             <table class="table table-striped table-hover table-bordered " id="myTable">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Name <i class="fa fa-sort"></i></th>
                     <th>Email</th>
                     <th>Phone<i class="fa fa-sort"></i></th>
@@ -56,7 +56,7 @@
                 <tbody>
                 @foreach($list_customers as $customer)
                     <tr>
-                        <td>{{$customer->id}}</td>
+                        <td>ID{{$customer->id}}</td>
                         <td>{{$customer->name}}</td>
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->phone_number}}</td>
@@ -65,20 +65,46 @@
                             <form action="{{route('customer.destroy',$customer->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <a href="#" class="view" id="view_icon" title="View" data-toggle="tooltip"><i
+                                <a href="#" class="view" id="view_icon" title="View" data-target="#quickview-customer-{{$customer->id}}" data-toggle="modal"><i
                                         class="material-icons">&#xE417;</i></a>
                                 <a href="{{route('customer.edit', $customer->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i
                                         class="material-icons">&#xE254;</i></a>
                                 <button type="submit" class="delete" title="Delete" data-toggle="tooltip"><i
                                         class="material-icons">&#xE872;</i></button>
-{{--                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i--}}
-{{--                                        class="material-icons">&#xE872;</i></a>--}}
+                                {{--                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i--}}
+                                {{--                                        class="material-icons">&#xE872;</i></a>--}}
                             </form>
                         </td>
                     </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="quickview-customer-{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="infoModal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Customer Info: ID{{$customer->id}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Name:</h6>
+                                    <p>- {{$customer->name}}</p>
+                                    <h6>Email:</h6>
+                                    <p>- {{$customer->email}}</p>
+                                    <h6>Phone Number:</h6>
+                                    <p>- {{$customer->phone_number}}</p>
+                                    <h6>Created At:</h6>
+                                    <p>- {{$customer->created_at}}</p>
+                                    <h6>Updated At:</h6>
+                                    <p>- {{$customer->updated_at}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
-
-
                 </tbody>
             </table>
             <div class="clearfix">
