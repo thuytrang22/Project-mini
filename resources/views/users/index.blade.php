@@ -1,5 +1,4 @@
 @extends('users.view')
-@extends('layouts.main')
 @section('content')
     <div class="card mb-5">
         <div class="card-body">
