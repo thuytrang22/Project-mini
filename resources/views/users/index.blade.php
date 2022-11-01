@@ -1,5 +1,10 @@
 @extends('users.view')
 @section('content')
+    @if ( session('store'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Saved Successfully!</strong>User has been successfully saved
+        </div>
+    @endif
     <div class="card mb-5">
         <div class="card-body">
             <div class="row">
