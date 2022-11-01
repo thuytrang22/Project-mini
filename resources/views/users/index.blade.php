@@ -1,32 +1,30 @@
 @extends('users.view')
 @section('content')
-    <div class="container mt-2">
-        <div class="from-row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>List user</h2>
+    @if ( session('destroy'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Delete Successfully!</strong>User has been successfully delete
+        </div>
+    @endif
+    <div class="card mb-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-auto">
+                    <a href="{{route('users.create')}}" class="btn btn-primary">
+                        <i class="fas fe-circle-plus"></i>Create New User
+                    </a>
                 </div>
-                <from action="{{route('users.create')}}" method="Post">
-                    <div class="pull-right mb-2">
-                        <a class="btn btn-success" href="{{route('users.create')}}">Create user</a>
-                    </div>
-                </from>
-                <form method="POST" class="col-auto ms-auto">
+                <form action="?" class="col-auto ms-auto">
                     <div class="input-group">
-                        <input type="text" id="search" name="search" class="form-control " value="{{request()->search}}"
+                        <input type="text" name="search" class="form-control " value="{{request()->search}}"
                                placeholder="search name user ..."/>
-
-                        <button type="button" class="btn btn-secondary">Search</button>
+                        <button type="submit" class="btn btn-secondary">Go!</button>
                     </div>
                 </form>
             </div>
-
-            @if($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{$message}}</p>
-                </div>
-            @endif
-            <table class=" table table-bordered">
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover m-0">
+                <thead>
                 <tr>
                     <th>S.No</th>
                     <th>Full Name</th>
@@ -36,33 +34,29 @@
                     <th>Address</th>
                     <th width="280px">Action</th>
                 </tr>
-                @php
-                    $i = 0;
-                @endphp
+                </thead>
+                <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{++$i}}</td>
+                        <td>{{$user->id}}</td>
                         <td>{{$user->full_name}}</td>
                         <td>{{$user->birthday}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->phone}}</td>
                         <td>{{$user->address}}</td>
                         <td>
-                            <from action="{{route('users.destroy', $user->id)}}" method="POST"></from>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-info">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
+                </tbody>
             </table>
-            {!! $users->links() !!}
-        </div>
-        <div class="card-body pd-0">
-            {{$users->$user(['search '=>request()->search])->link('vendor.pagination.bootstrap-5')}}
         </div>
     </div>
-
 @endsection
 @push('js')
     <script type="text/javascript">
