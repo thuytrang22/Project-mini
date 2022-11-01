@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $users = User::where('full_name', 'like', '%' . $search . '%')->orderBy('id', 'desc')->paginate(20);
+        $users = User::where('full_name', 'like', '%' . $search . '%')->orderBy('id', 'desc')->paginate(5);
         return view('users.index', compact('users'));
     }
 
@@ -21,16 +21,13 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-
-        /*$request->validate([
-            'full_name' => 'required',
-            'birthday' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ],[],[
-            'full_name'=>  'full_name',
-            'address' =>'address'
+/*
+        $request->validate([
+            'full_name' => 'required|string',
+            'birthday' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
         ]);
         User::create([
             'full_name' => ucwords($request->full_name),
@@ -75,6 +72,6 @@ class UserController extends Controller
     }
     public function destroy(User $user){
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User has been deleted successfully');
+        return back()->with('success', 'User has been deleted successfully');
     }
 }
