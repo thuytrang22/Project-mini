@@ -4,7 +4,7 @@
     <div class="col-md-6 col-lg-4">
         <div class="card">
             <div class="card-header">
-                Detail
+                Detail User
             </div>
             <div class="card-body">
                 <p>ID :{{ $user->id }}</p>
@@ -12,10 +12,9 @@
                 <p>Birthday : {{$user->birthday}} </p>
                 <p>Email : {{$user->email}}</p>
                 <p>Phone : {{$user->phone}}</p>
-                <p>Address : {{$user->address}}</p>{{--
-                <p>Created :<small class="text-muted">{{$user->create_at->format('d/m/Y H:i:s')}}</small></p>
-                <p>Last Update :<small class="text-muted">{{$user->updated_at->format('d/m/Y H:i:s')}}</small></p>--}}
+                <p>Address : {{$user->address}}</p>
             </div>
         </div>
     </div>
 </div>
+@endsection

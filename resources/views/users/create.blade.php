@@ -21,7 +21,7 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Birthday:</label>
-                        <input type="text" name="full_name" value="{{old('birthday')}}"
+                        <input type="date" name="full_name" value="{{old('birthday')}}"
                                class="form-control" @error('birthday') is-invalid @enderror>
                         @error('birthday')
                         <div class="invalid-feedback">
@@ -32,7 +32,7 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
-                        <input type="text" name="full_name" value="{{old('email')}}"
+                        <input type="email" name="full_name" value="{{old('email')}}"
                                class="form-control" @error('email') is-invalid @enderror>
                         @error('email')
                         <div class="invalid-feedback">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -19,9 +19,10 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
+
+        /*$request->validate([
             'full_name' => 'required',
             'birthday' => 'required',
             'email' => 'required',
@@ -38,7 +39,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'address' => ucwords($request->address),
         ]);
-        return to_route('users.index')->with('store', 'success');
+        return to_route('users.index')->with('store', 'success');*/
     }
 
     public function show(User $user)
