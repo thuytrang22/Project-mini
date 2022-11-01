@@ -31,10 +31,4 @@ class UserRequest extends FormRequest
             'address' => 'required|string',
         ];
     }
-    public function validatedInputs()
-    {
-        $keys = array_keys($this->rules());
-
-        return $this->only($keys);
-    }
 }
