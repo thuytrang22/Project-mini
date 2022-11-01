@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('view')
 @section('content')
     <form action="{{ route('users.create')  }}" method="POST">
         <div class="pull-right">
