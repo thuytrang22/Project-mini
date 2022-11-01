@@ -56,14 +56,14 @@ class UserController extends Controller
         $request->validate([
             'full_name' => 'required',
             'birthday' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
             'address' => 'required',
         ],[],[
             'full_name'=>  'full_name',
             'address' =>'address'
         ]);
-        $user::update([
+        $user->update([
             'full_name' => ucwords($request->full_name),
             'birthday' => $request->birthday,
             'email' => $request->email,

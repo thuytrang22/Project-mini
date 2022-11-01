@@ -61,8 +61,9 @@
                         <td>
                             <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
                             <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
+                            {{--<form action="{route('$users.destroy'}"></form>
                             <button class="btn btn-sm " type="button" data-url="{{route('$users.destroy',
-                            ['user'=>$user->id])}}">Delete</button>
+                            ['user'=>$user->id])}}">Delete</button>--}}
                         </td>
                     </tr>
                 @endforeach

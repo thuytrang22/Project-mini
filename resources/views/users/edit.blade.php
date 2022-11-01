@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     @csrf
-                    @method('PUT')
+                    @method('put')
                     <div class="mb-3">
                         <label for="" class="form-label">Full Name:</label>
                         <input type="text" name="full_name" value="{{old('full_name',$user->full_name)}}"
@@ -22,7 +22,7 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Birthday:</label>
-                        <input type="text" name="birthday" value="{{old('birthday'.$user->brithday)}}"
+                        <input type="date" name="birthday" value="{{old('birthday'.$user->brithday)}}"
                                class="form-control" @error('birthday') is-invalid @enderror>
                         @error('birthday')
                         <div class="invalid-feedback">
