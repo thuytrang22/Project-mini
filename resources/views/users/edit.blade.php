@@ -1,74 +1,75 @@
-@extends('users.index')
-<body>
-<div class="container mt-2">
+@extends('view')
+@section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2">
-                <h2>Edit User</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('users.index')}}" enctype="multipart/form-data">Back</a>
-            </div>
+        <div class="col-md-6 col-lg-4 ">
+            <form action="{{route('users.update',['user'=>$user->id])}}" method="post" class="card">
+                <div class="card-header">
+                    <i class="fas fa-circle-plus"></i> Edit User
+                </div>
+                <div class="card-body">
+                    @csrf
+                    @method('put')
+                    <div class="mb-3">
+                        <label for="" class="form-label">Full Name:</label>
+                        <input type="text" name="full_name" value="{{old('full_name',$user->full_name)}}"
+                               class="form-control" @error('full_name') is-invalid @enderror>
+                        @error('full_name')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Birthday:</label>
+                        <input type="date" name="birthday" value="{{old('birthday'.$user->brithday)}}"
+                               class="form-control" @error('birthday') is-invalid @enderror>
+                        @error('birthday')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Email</label>
+                        <input type="text" name="email" value="{{old('email',$user->email)}}"
+                               class="form-control" @error('email') is-invalid @enderror>
+                        @error('email')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Phone:</label>
+                        <input type="text" name="phone" value="{{old('phone',$user->phone)}}"
+                               class="form-control" @error('phone') is-invalid @enderror>
+                        @error('phone')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Address:</label>
+                        <input type="text" name="address" value="{{old('address',$user->address)}}"
+                               class="form-control" @error('address') is-invalid @enderror>
+                        @error('address')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-database"></i>Update
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-    @if(session('status'))
-        <div class="'alert alert-success mb-1 mt-1">
-            {{session('status')}}
-        </div>
-    @endif
-    @php
-        $i = 0;
-    @endphp
-    <from action="{{route('users.edit',$i)}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="from-group">
-                    <strong>Full Name:</strong>
-                    <input type="text" name="name" class="from-control" value="{{$user->full_name}}" placeholder="User Name">
-                    @error('name')
-                    <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="from-group">
-                    <strong>Date of birth:</strong>
-                    <input type="date" name="name" class="from-control" value="{{$user->birthday}}"placeholder="Date Of Birth">
-                    @error('birthday')
-                    <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="from-group">
-                    <strong>Email:</strong>
-                    <input type="email" name="name" class="from-control" value="{{$user->email}}"placeholder="Email">
-                    @error('email')
-                    <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="from-group">
-                    <strong>Phone:</strong>
-                    <input type="number" name="name" class="from-control" value="{{$user->phone}}"placeholder="Phone">
-                    @error('phone')
-                    <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="from-group">
-                    <strong>Address</strong>
-                    <input type="text" name="name" class="from-control" value="{{$user->address}}"placeholder="Address">
-                    @error('address')
-                    <div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary ml-3">Submit</button>
-        </div>
-    </from>
-</div>
+@endsection
