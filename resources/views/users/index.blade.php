@@ -58,6 +58,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-body pb-0">
+            {{$users->appends(['search'=>request()->search])->links('vendor.pagination.bootstrap-5')}}
+        </div>
     </div>
 @endsection
 @push('js')
