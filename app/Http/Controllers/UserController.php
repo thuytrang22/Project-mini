@@ -21,10 +21,9 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-/*
         $request->validate([
             'full_name' => 'required|string',
-            'birthday' => 'required|string',
+            'birthday' => 'required|date',
             'email' => 'required|email',
             'phone' => 'required|string',
             'address' => 'required|string',
@@ -36,7 +35,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'address' => ucwords($request->address),
         ]);
-        return to_route('users.index')->with('store', 'success');*/
+        return to_route('users.index')->with('store', 'success');
     }
 
     public function show(User $user)
