@@ -31,4 +31,10 @@ class EditRequests extends FormRequest
             'address' => 'required|string',
         ];
     }
+    public function messages()
+    {
+        return [
+            'required' => ':attribute is required',
+        ];
+    }
 }

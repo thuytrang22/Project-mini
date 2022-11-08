@@ -9,27 +9,29 @@ use App\Http\Model;
 class UserController extends Controller
 {
 
-    public function index(Request $request){
-        $search = $request->search;
-        $users = User::where('full_name', 'like', '%' . $search . '%')->orderBy('id', 'desc')->paginate(20);
-        return view('users.index', compact('users'));
+    public function index(Request $request)
+    {
+        $keywords = $request->keyword;
+        if ($keywords != '') {
+            $users = User::where('full_name', 'like', '%' . $keywords . '%')
+                ->orderBy('id', 'desc')->Paginate(config('constants.PAGINATION'));
+            return view('users.index', compact('users'));
+        } else {
+            $users = User::orderBy('id', 'desc')->Paginate(config('constants.PAGINATION'));
+            return view('users.index', compact('users'));
+        }
     }
-    public function edit(User $user){
+
+    public function edit(User $user)
+    {
         return view('users.edit', [
-            'user'=>$user
+            'user' => $user
         ]);
     }
-    public function update(Request $request, User $user){
-        $request->validate([
-            'full_name' => 'required',
-            'birthday' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'address' => 'required',
-        ],[],[
-            'full_name'=>  'full_name',
-            'address' =>'address'
-        ]);
+
+    public function update(EditRequests $request)
+    {
+        $user = $request->validated();
         $user->update([
             'full_name' => ucwords($request->full_name),
             'birthday' => $request->birthday,
