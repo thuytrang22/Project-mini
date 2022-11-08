@@ -11,15 +11,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $keywords = $request->keyword;
-//        define("paginate",20);
         if ($keywords != '') {
             $users = User::where('full_name', 'like', '%' . $keywords . '%')
-                ->orderBy('id', 'desc')->$result = MyModel::paginate($per_page, $columns, config('app.page_name'));
+                ->orderBy('id', 'desc')->Paginate( config('constants.PAGINATION'));
+            return view('users.index', compact('users'));
         } else {
-            $users =User::orderBy('id', 'desc')->Paginate(20);
+            $users =User::orderBy('id', 'desc')->Paginate( config('constants.PAGINATION'));
             return view('users.index', compact('users'));
         }
-        return view('users.index', compact('users'));
     }
 
     public function create()
