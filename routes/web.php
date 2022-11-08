@@ -17,6 +17,6 @@ use App\Http\Controllers\UserController;
     return view('welcome');
 });*/
 Route::get('/users',[UserController::class, 'index']);
-Route::put('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}', [UserController::class, 'show']);
 
 
