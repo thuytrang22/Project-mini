@@ -6,7 +6,7 @@ use App\Models\Customer;
 class CustomerController extends Controller
 {
     public function index(Customer $customer){
-        $list_customers= $customer->getListUser();
-        return view('customer.index',compact('list_customers'));
+        $customers= $customer->getListUser();
+        return view('customer.index',compact('customers'));
     }
 }
