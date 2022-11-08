@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="my-5">{{--Mini --}}Project</h2>
+    <h2 class="my-5">Mini Project</h2>
     @yield('content')
     @stack('modal')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

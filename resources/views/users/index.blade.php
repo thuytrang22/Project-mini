@@ -46,25 +46,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @if(count($users) > 0)
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->full_name}}</td>
+                            <td>{{$user->birthday}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>{{$user->address}}</td>
+                            <td>
+                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
+                                    <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-info">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
                     <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->full_name}}</td>
-                        <td>{{$user->birthday}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->phone}}</td>
-                        <td>{{$user->address}}</td>
-                        <td>
-                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
-                                <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-info">Delete</button>
-                            </form>
-                        </td>
+                        <td colspan="5" class="text-center">No Data Found</td>
                     </tr>
-                @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
