@@ -16,13 +16,13 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i<25;$i++){
-        DB::table('customers')->insert([
-            'name' => Str::random(12),
-            'email' => Str::random(10),
-            'phone_number' => Str::random(10),
-            'created_at' => now()
-        ]);
+        for ($i = 0; $i < 25; $i++) {
+            DB::table('customers')->insert([
+                'name' => Str::random(12),
+                'email' => Str::random(10),
+                'phone_number' => Str::random(10),
+                'created_at' => now()
+            ]);
         }
 
     }
