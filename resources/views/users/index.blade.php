@@ -25,7 +25,7 @@
                 </div>
                 <form action="?" class="col-auto ms-auto">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control " value="{{request()->search}}"
+                        <input type="text" name="search" class="form-control " value="{{request()->keywords}}"
                                placeholder="search name user ..."/>
                         <button type="submit" class="btn btn-secondary">Go!</button>
                     </div>
@@ -69,7 +69,7 @@
             </table>
         </div>
         <div class="card-body pb-0">
-            {{$users->appends(['search'=>request()->search])->links('vendor.pagination.bootstrap-5')}}
+            {{$users->appends(['search'=>request()->keywords])->links('vendor.pagination.bootstrap-5')}}
         </div>
     </div>
 @endsection

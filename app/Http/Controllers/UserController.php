@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -9,8 +10,14 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->search;
-        $users = User::where('full_name', 'like', '%' . $search . '%')->orderBy('id', 'desc')->Paginate(20);
+        $keywords = $request->keyword;
+        if ($keywords != '') {
+            $users = User::where('full_name', 'like', '%' . $keywords . '%')
+                ->orderBy('id', 'desc')->Paginate(20);
+        } else {
+            $users =User::orderBy('id', 'desc')->Paginate(20);
+            return view('users.index', compact('users'));
+        }
         return view('users.index', compact('users'));
     }
 
@@ -41,24 +48,28 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('users.show', [
-    'user'=>$user
+            'user' => $user
         ]);
     }
-    public function edit(User $user){
+
+    public function edit(User $user)
+    {
         return view('users.edit', [
-            'user'=>$user
+            'user' => $user
         ]);
     }
-    public function update(Request $request, User $user){
+
+    public function update(Request $request, User $user)
+    {
         $request->validate([
             'full_name' => 'required',
             'birthday' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
             'address' => 'required',
-        ],[],[
-            'full_name'=>  'full_name',
-            'address' =>'address'
+        ], [], [
+            'full_name' => 'full_name',
+            'address' => 'address'
         ]);
         $user->update([
             'full_name' => ucwords($request->full_name),
@@ -69,7 +80,9 @@ class UserController extends Controller
         ]);
         return to_route('users.index')->with('update', 'success');
     }
-    public function destroy(User $user){
+
+    public function destroy(User $user)
+    {
         $user->delete();
         return back()->with('success', 'User has been deleted successfully');
     }
