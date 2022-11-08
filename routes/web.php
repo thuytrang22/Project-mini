@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +14,14 @@ use App\Http\Controllers\CustomerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*
+Route::get('/', function () {
+    return view('welcome');
+});*/
 
 //Customer
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
-
-
-
-
+Route::get('/users/create', [UserController::class, 'create']);
 
 
