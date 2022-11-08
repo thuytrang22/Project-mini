@@ -75,14 +75,14 @@
             </table>
         </div>
         <div class="card-body pb-0">
-            {{$users->appends(['search'=>request()->keywords])->links('vendor.pagination.bootstrap-5')}}
+            {{$users->appends(['keywords'=>request()->keywords])->links('vendor.pagination.bootstrap-5')}}
         </div>
     </div>
 @endsection
 @push('js')
     <script type="text/javascript">
         var route = "{{ url('autocomplete-search') }}";
-        $('#search').typeahead({
+        $('#keywords').typeahead({
             source: function (query, process) {
                 return $.get(route, {
                     query: query
