@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 
 /*
@@ -14,10 +15,8 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-//Customer
+
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
-
-
-
+Route::get('/users/create', [UserController::class, 'create']);
 
 
