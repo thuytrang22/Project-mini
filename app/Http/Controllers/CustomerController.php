@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,18 +18,11 @@ class CustomerController extends Controller
         return view('customer.create');
     }
 
-    public function store(Request $request,Customer $customer){
-        $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:customers,email',
-            'phone_number' => 'required|min:10|max:12'
-        ];
-        $request->validate($rules);
-
+    public function store(CustomerRequest $request,Customer $customer){
+        $request->validated();
         DB::beginTransaction();
-
         try {
-            $query = $customer->addUser($request);
+            $query = $customer->insert($request);
             DB::commit();
             return redirect()->route('customer.index')->with('notification', 'User has been created successfully');
         } catch (\Exception $e) {
