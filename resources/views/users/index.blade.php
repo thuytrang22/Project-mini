@@ -8,6 +8,9 @@
     @if ( session('update'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Update Successfully!</strong>User has been successfully update
+    @if ( session('destroy'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Delete Successfully!</strong>User has been successfully delete
         </div>
     @endif
     <div class="card mb-5">
