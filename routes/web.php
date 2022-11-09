@@ -16,7 +16,11 @@ use App\Http\Controllers\CustomerController;
 */
 
 
-Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
-Route::get('/users/create', [UserController::class, 'create']);
 
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/create', [UserController::class, 'create']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
 

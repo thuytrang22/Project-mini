@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
     protected $table = 'customers';
 
-    public function getListUser(){
-        $data = $this->orderBy('created_at','desc')->paginate(20);
+    public function getCustomer()
+    {
+        $data = $this->orderBy('created_at', 'desc')->paginate(20);
         return $data;
     }
 }
