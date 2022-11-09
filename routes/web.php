@@ -12,20 +12,9 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
 
 Route::get('/users', [UserController::class, 'index']);
-=======
-/*
-Route::get('/', function () {
-    return view('welcome');
-});*/
 
 Route::get('/users/create', [UserController::class, 'create']);
-
->>>>>>> develop
 
