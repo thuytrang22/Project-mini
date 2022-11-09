@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $keywords = trim($request->keyword);
+        $keywords = trim($request->keywords);
         if ($keywords != '') {
             $users = User::where('full_name', 'like', '%' . $keywords . '%')
                 ->orderBy('id', 'desc')->Paginate(config('constants.PAGINATION'));
