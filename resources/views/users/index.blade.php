@@ -1,4 +1,4 @@
-@extends('users.view')
+@extends('view')
 @section('content')
     @if ( session('store'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -72,6 +72,7 @@
     <script type="text/javascript">
         var route = "{{ url('autocomplete-search') }}";
         $('#keywords').typeahead({
+
             source: function (query, process) {
                 return $.get(route, {
                     query: query

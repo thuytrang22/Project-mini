@@ -43,5 +43,13 @@ class UserController extends Controller
             'address' => ucwords($request->address),
         ]);
         return to_route('users.index')->with('store', 'success');
+
+    }
+
+    public function show(User $user)
+    {
+        return view('users.show', [
+            'user' => $user
+        ]);
     }
 }

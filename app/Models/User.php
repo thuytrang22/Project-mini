@@ -20,6 +20,7 @@ class User extends Authenticatable
         'birthday',
         'email',
         'phone',
-        'address',
+        'address'
     ];
+
 }
