@@ -11,9 +11,9 @@ class Customer extends Model
 
     protected $table = 'customers';
 
-    public function getCustomer()
+    public function getCustomers()
     {
-        $data = $this->orderBy('created_at', 'desc')->paginate(20);
+        $data = $this->orderBy('created_at', 'desc')->paginate(config('const.PAGINATE'));
         return $data;
     }
 }
