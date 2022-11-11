@@ -11,9 +11,12 @@ class Customer extends Model
 
     protected $table = 'customers';
 
-    public function getCustomers()
+    public function getCustomers($request)
     {
-        $data = $this->orderBy('created_at', 'desc')->paginate(config('const.PAGINATE'));
-        return $data;
+        $customers = $this->query();
+        if ($request->keyword) {
+            $customers->where('name', 'like', '%' . $request->keyword . '%')->orWhere('email', 'like', '%' . $request->keyword . '%');
+        }
+        return $customers->orderBy('created_at', 'desc')->paginate(config('const.PAGINATE'));
     }
 }

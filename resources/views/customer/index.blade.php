@@ -24,12 +24,16 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2>Customer <b>Details</b></h2>
+                        <h2>List of <b>Customers</b></h2>
                     </div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" id="search" class="form-control" placeholder="Search&hellip;">
+                            <form method="GET" action="{{route('customer.index')}}">
+                                <i class="material-icons">&#xE8B6;</i>
+                                <input type="text" id="" name="keyword" value="{{request()->keyword ?? ''}}"
+                                       class="form-control" placeholder="Search&hellip;">
+                                <button type="submit" class="btn btn-primary mt-1">Search</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -65,14 +69,14 @@
                         </tr>
                     @endforeach
                 @else
-                       <tr>
-                          <td>No Data</td>
-                       </tr>
+                    <tr>
+                        <td>No Data</td>
+                    </tr>
                 @endif
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Showing <b>{{$customers->count()}}</b> out of <b></b> entries</div>
                 {!! $customers->links() !!}
             </div>
         </div>
