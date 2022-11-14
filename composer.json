@@ -24,9 +24,13 @@
     },
     "autoload": {
         "psr-4": {
+            "classmap": [
+                "database"
+            ],
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "app/Modules/"
         }
     },
     "autoload-dev": {
@@ -34,6 +38,7 @@
             "Tests\\": "tests/"
         }
     },
+
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

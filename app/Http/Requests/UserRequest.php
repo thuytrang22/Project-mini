@@ -21,14 +21,20 @@ class UserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'full_name' => 'full_name',
-            'birthday' => 'birthday',
-            'email' => 'email',
-            'phone' => 'phone',
-            'address' => 'address',
+            'full_name' => 'required',
+            'birthday' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'required' => ':attribute is required',
         ];
     }
 }

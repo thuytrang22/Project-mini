@@ -13,11 +13,11 @@
                 <div class="card-body">
                     @csrf
                     <div class="mb-3">
-                        <label for="" class="form-label">Full Name:</label>
+                        <label for="" class="form-label">Full Name: <span class="text-danger">*</span> </label>
                         <input type="text" name="full_name" value="{{old('full_name')}}"
-                               class="form-control" @error('full_name') is-invalid @enderror>
+                               class="form-control" @error('full_name') @enderror>
                         @error('full_name')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
@@ -26,9 +26,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Birthday:</label>
                         <input type="date" name="birthday" value="{{old('birthday')}}"
-                               class="form-control" @error('birthday') is-invalid @enderror>
+                               class="form-control" @error('birthday') @enderror>
                         @error('birthday')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
@@ -37,9 +37,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
                         <input type="email" name="email" value="{{old('email')}}"
-                               class="form-control" @error('email') is-invalid @enderror>
+                               class="form-control" @error('email')  @enderror>
                         @error('email')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
@@ -48,9 +48,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Phone:</label>
                         <input type="text" name="phone" value="{{old('phone')}}"
-                               class="form-control" @error('phone') is-invalid @enderror>
+                               class="form-control" @error('phone') @enderror>
                         @error('phone')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
@@ -59,9 +59,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Address:</label>
                         <input type="text" name="address" value="{{old('address')}}"
-                               class="form-control" @error('address') is-invalid @enderror>
+                               class="form-control" @error('address')  @enderror>
                         @error('address')
-                        <div class="invalid-feedback">
+                        <div class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
