@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\User as UserResource;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $keywords = trim($request->keywords);
-        if ($keywords != '') {
-            $users = User::where('full_name', 'like', '%' . $keywords . '%')
-                ->orderBy('id', 'desc')->Paginate(config('constants.PAGINATION'));
-        } else {
-            $users = User::orderBy('id', 'desc')->Paginate(config('constants.PAGINATION'));
-
-        }
-        return view('users.index', compact('users'));
-        /*return response()->json($users);*/
+        $users = User::all();
+        $arr = [
+            'status' => true,
+            'message' => "Danh sách user",
+            'data'=>UserResource::collection($users)
+        ];
+        return response()->json($arr, 200);
     }
 
     public function create()
@@ -29,17 +27,41 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $data = $request->validated();
-        User::create($data);
-
-        return to_route('users.index')->with('store', 'success');
+        $input = $request->validated();
+        if($input->fails()){
+            $arr = [
+                'success' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $input->errors()
+            ];
+            return response()->json($arr, 200);
+        }
+        User::create($input);
+        $arr = ['status' => true,
+            'message'=>"User đã lưu thành công",
+            'data'=> new UserResource($input)
+        ];
+        return response()->json($arr, 201);
     }
 
-    public function show(User $user)
+    public function show(User $user,$id)
     {
-        return view('users.show', [
-            'user' => $user
-        ]);
+        $user = User::find($id);
+        if (is_null($user)) {
+            $arr = [
+                'success' => false,
+                'message' => 'Không có user này',
+                'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+            'status' => true,
+            'message' => "Chi tiết user ",
+            'data'=> new UserResource($user)
+        ];
+        return response()->json($arr, 201);
+
     }
 
     public function edit(User $user)
@@ -49,16 +71,39 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserRequest $request)
+    public function update(UserRequest $request, User $user)
     {
-        $data = $request->validated();
-        User::updated($data);
-        return to_route('users.index')->with('update', 'success');
+        $input = $request->validator();
+        if($input->fails()){
+            $arr = [
+                'success' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $input->errors()
+            ];
+            return response()->json($arr, 200);
+        }
+        $user->full_name = $input['full_name'];
+        $user->birthday = $input['birthday'];
+        $user->email = $input['email'];
+        $user->phone = $input['phone'];
+        $user->address = $input['address'];
+        $user->save();
+        $arr = [
+            'status' => true,
+            'message' => 'User cập nhật thành công',
+            'data' => new UserResource($user)
+        ];
+        return response()->json($arr, 200);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return back()->with('success', 'User has been deleted successfully');
+        $arr = [
+            'status' => true,
+            'message' =>'User đã được xóa',
+            'data' => [],
+        ];
+        return response()->json($arr, 200);
     }
 }
