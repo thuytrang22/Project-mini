@@ -15,7 +15,7 @@ class UserController extends Controller
         $arr = [
             'status' => true,
             'message' => "Danh sách user",
-            'data'=>UserResource::collection($users)
+            'data' => UserResource::collection($users)
         ];
         return response()->json($arr, 200);
     }
@@ -28,23 +28,23 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $input = $request->validated();
-        if($input->fails()){
+        /*if ($input->fails()) {
             $arr = [
                 'success' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $input->errors()
             ];
             return response()->json($arr, 200);
-        }
+        }*/
         User::create($input);
         $arr = ['status' => true,
-            'message'=>"User đã lưu thành công",
-            'data'=> new UserResource($input)
+            'message' => "User đã lưu thành công",
+            'data' => new UserResource($input)
         ];
         return response()->json($arr, 201);
     }
 
-    public function show(User $user,$id)
+    public function show(User $user, $id)
     {
         $user = User::find($id);
         if (is_null($user)) {
@@ -58,7 +58,7 @@ class UserController extends Controller
         $arr = [
             'status' => true,
             'message' => "Chi tiết user ",
-            'data'=> new UserResource($user)
+            'data' => new UserResource($user)
         ];
         return response()->json($arr, 201);
 
@@ -74,7 +74,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $input = $request->validator();
-        if($input->fails()){
+        if ($input->fails()) {
             $arr = [
                 'success' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',
@@ -82,12 +82,7 @@ class UserController extends Controller
             ];
             return response()->json($arr, 200);
         }
-        $user->full_name = $input['full_name'];
-        $user->birthday = $input['birthday'];
-        $user->email = $input['email'];
-        $user->phone = $input['phone'];
-        $user->address = $input['address'];
-        $user->save();
+        User::update($input);
         $arr = [
             'status' => true,
             'message' => 'User cập nhật thành công',
@@ -101,7 +96,7 @@ class UserController extends Controller
         $user->delete();
         $arr = [
             'status' => true,
-            'message' =>'User đã được xóa',
+            'message' => 'User đã được xóa',
             'data' => [],
         ];
         return response()->json($arr, 200);

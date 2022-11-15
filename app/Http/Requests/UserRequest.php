@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class UserRequest extends FormRequest
 {
     /**
@@ -24,7 +25,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'id',
+            'id'=>'required',
             'full_name' => 'required',
             'birthday' => 'required',
             'email' => 'required|email',
@@ -37,5 +38,8 @@ class UserRequest extends FormRequest
         return [
             'required' => ':attribute is required',
         ];
+    }
+    protected function failedValidation(Validator  $validator) {
+        throw new HttpResponseException(response()->json($validator->errors()->all(), 422));
     }
 }
