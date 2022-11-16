@@ -15,13 +15,11 @@ class User extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' =>$this->id,
             'full_name' => $this->full_name,
             'birthday' => $this->birthday,
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
-            'posts' => User::collection($this->posts),
              ];
     }
 }

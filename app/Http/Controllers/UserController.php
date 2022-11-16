@@ -6,10 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Validation\Validator;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $users = User::all();
         $arr = [
@@ -27,21 +28,9 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $input = $request->validated();
-        /*if ($input->fails()) {
-            $arr = [
-                'success' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
-                'data' => $input->errors()
-            ];
-            return response()->json($arr, 200);
-        }*/
-        User::create($input);
-        $arr = ['status' => true,
-            'message' => "User đã lưu thành công",
-            'data' => new UserResource($input)
-        ];
-        return response()->json($arr, 201);
+        $data = $request->validated();
+        User::create($data);
+        return response()->json(['massage'=>'success']);
     }
 
     public function show(User $user, $id)
@@ -73,22 +62,23 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        $input = $request->validator();
-        if ($input->fails()) {
-            $arr = [
-                'success' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
-                'data' => $input->errors()
-            ];
-            return response()->json($arr, 200);
-        }
-        User::update($input);
+        $data = $request->validated();
+        User::create($data);
+
+
+        $user->full_name =$data['full_name'];
+        $user->birthday =$data['birthday'];
+        $user->email =$data['email'];
+        $user->phone =$data['phone'];
+        $user->address =$data['address'];
+        $user->save();
         $arr = [
             'status' => true,
             'message' => 'User cập nhật thành công',
             'data' => new UserResource($user)
         ];
-        return response()->json($arr, 200);
+        return response()->json(['massage'=>'success']);
+
     }
 
     public function destroy(User $user)
