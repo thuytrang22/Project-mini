@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -13,12 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $arr = [
-            'status' => true,
-            'message' => "Danh sách user",
-            'data' => UserResource::collection($users)
-        ];
-        return response()->json($arr, 200);
+        return response()->json($users);
     }
 
     public function create()
@@ -33,24 +29,12 @@ class UserController extends Controller
         return response()->json(['massage'=>'success']);
     }
 
-    public function show(User $user, $id)
+    public function show( $id)
     {
         $user = User::find($id);
-        if (is_null($user)) {
-            $arr = [
-                'success' => false,
-                'message' => 'Không có user này',
-                'dara' => []
-            ];
-            return response()->json($arr, 200);
-        }
-        $arr = [
-            'status' => true,
-            'message' => "Chi tiết user ",
-            'data' => new UserResource($user)
-        ];
-        return response()->json($arr, 201);
-
+        return response()->json( ['user'=>$user,'User retrieved successfully.']);
+//        $user = User::find($id);
+//        return $this->UserResponse(new UserResource($user), 'Product retrieved successfully.');
     }
 
     public function edit(User $user)
@@ -60,35 +44,28 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(UserUpdateRequest $request,User $user)
     {
         $data = $request->validated();
-        User::create($data);
-
-
-        $user->full_name =$data['full_name'];
-        $user->birthday =$data['birthday'];
-        $user->email =$data['email'];
-        $user->phone =$data['phone'];
-        $user->address =$data['address'];
-        $user->save();
-        $arr = [
-            'status' => true,
-            'message' => 'User cập nhật thành công',
-            'data' => new UserResource($user)
-        ];
-        return response()->json(['massage'=>'success']);
+        $user->update($data);
+        return response()->json([
+            'massage'=>'success',
+            'data'=>$data
+        ]);
 
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user,$id)
     {
+
+//        $user->delete();
+//        User::find($id)->destroy();
+//        return response()->json([$user,'massage'=>'success']);
         $user->delete();
-        $arr = [
+        return response($id)->json([
             'status' => true,
-            'message' => 'User đã được xóa',
-            'data' => [],
-        ];
-        return response()->json($arr, 200);
+            'message' => "User Deleted successfully!",
+        ]);
+        /*return $this->UserResponse([], 'Product deleted successfully.');*/
     }
 }
