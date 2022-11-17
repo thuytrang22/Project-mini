@@ -26,15 +26,13 @@ class UserController extends Controller
     {
         $data = $request->validated();
         User::create($data);
-        return response()->json(['massage'=>'success']);
+        return response()->json(['massage' => 'success']);
     }
 
-    public function show( $id)
+    public function show($id)
     {
         $user = User::find($id);
-        return response()->json( ['user'=>$user,'User retrieved successfully.']);
-//        $user = User::find($id);
-//        return $this->UserResponse(new UserResource($user), 'Product retrieved successfully.');
+        return response()->json(['user' => $user, 'User retrieved successfully.']);
     }
 
     public function edit(User $user)
@@ -44,28 +42,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserUpdateRequest $request,User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         $data = $request->validated();
         $user->update($data);
         return response()->json([
-            'massage'=>'success',
-            'data'=>$data
+            'massage' => 'User updated successfully!',
+            'data' => $data
         ]);
 
     }
 
-    public function destroy(User $user,$id)
+    public function destroy(User $user)
     {
-
-//        $user->delete();
-//        User::find($id)->destroy();
-//        return response()->json([$user,'massage'=>'success']);
         $user->delete();
-        return response($id)->json([
+        return response()->json([
             'status' => true,
-            'message' => "User Deleted successfully!",
-        ]);
-        /*return $this->UserResponse([], 'Product deleted successfully.');*/
+            'message' => "User deleted successfully!",
+        ], 200);
     }
 }
