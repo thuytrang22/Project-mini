@@ -1,5 +1,10 @@
 @extends('layouts.main')
 @section('content')
+    <form action="{{ route('users.create')  }}" method="POST">
+        <div class="pull-right">
+            <a class="btn btn-primary" href={{ route('users.index')  }}>Back</a>
+        </div>
+    </form>
     <div class="row">
         <div class="col-md-6 col-lg-4 ">
             <form action="{{route('users.update',['user'=>$user->id])}}" method="post" class="card">

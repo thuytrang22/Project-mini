@@ -41,7 +41,7 @@ class UserRequest extends FormRequest
             'required' => ':attribute is required',
         ];
     }
-    protected function failedValidation(Validator $validator) {
+    /*protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json($validator->errors()->all(), 422));
-    }
+    }*/
 }

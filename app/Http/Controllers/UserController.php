@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserUpdateRequest;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\core\Service\UserService;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\User as UserResource;
-use Illuminate\Validation\Validator;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
+    protected $service;
+
+    public function __construct(UserService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $users = $this->service->paginate();
+        return view('users.index', compact("users"));
     }
 
     public function create()
@@ -24,41 +28,31 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $data = $request->validated();
-        User::create($data);
-        return response()->json(['massage' => 'success']);
+        $this->service->create($request->validate());
+        return redirect()->route('users.index');
     }
 
     public function show($id)
     {
-        $user = User::find($id);
-        return response()->json(['user' => $user, 'User retrieved successfully.']);
+        $user = $this->service->find($id);
+        return view('users.show', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit', [
-            'user' => $user
-        ]);
+        $user = $this->service->find($id);
+        return view('users.edit', compact('user'));
     }
 
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, $id)
     {
-        $data = $request->validated();
-        $user->update($data);
-        return response()->json([
-            'massage' => 'User updated successfully!',
-            'data' => $data
-        ]);
-
+        $this->service->update($id, $request->all());
+        return redirect()->route('users.edit');
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return response()->json([
-            'status' => true,
-            'message' => "User deleted successfully!",
-        ], 200);
+        $this->service->destroy($id);
+        return redirect()->route('users.index');
     }
 }
