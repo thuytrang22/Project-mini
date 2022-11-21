@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\core\Service\UserService;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected $service;
+    protected UserService $service;
 
     public function __construct(UserService $service)
     {
         $this->service = $service;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->service->paginate();
+        $keywords = $request->search;
+        $users = $this->service->getAll($keywords);
         return view('users.index', compact("users"));
     }
 
@@ -28,8 +30,8 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $this->service->create($request->validate());
-        return redirect()->route('users.index');
+        $users = $this->service->store($request->all());
+        return view('users.index', compact('users'));
     }
 
     public function show($id)
@@ -52,7 +54,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $this->service->destroy($id);
-        return redirect()->route('users.index');
+        $this->service->delete();
+        return view('users.index');
     }
 }

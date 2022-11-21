@@ -75,7 +75,7 @@
             </table>
         </div>
         <div class="card-body pb-0">
-            {{$users->appends(['keywords'=>request()->keywords])->links('vendor.pagination.bootstrap-5')}}
+{{--            {{$users->appends(['keywords'=>request()->keywords])->links('vendor.pagination.bootstrap-5')}}--}}
         </div>
     </div>
 @endsection

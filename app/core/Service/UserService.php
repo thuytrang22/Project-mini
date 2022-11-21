@@ -1,8 +1,11 @@
 <?php
 
 namespace App\core\Service;
+
 use App\Http\Controllers\Request;
 use App\core\Repositories\UserRepository;
+use App\Models\User;
+use Carbon\Carbon;
 
 class UserService extends UserRepository
 {
@@ -11,6 +14,11 @@ class UserService extends UserRepository
     public function __construct(UserRepository $repository)
     {
         return $this->repository = $repository;
+    }
+
+    public function getAll($keywords)
+    {
+        return $this->repository->getAll($keywords);
     }
 
     public function paginate()
@@ -23,23 +31,20 @@ class UserService extends UserRepository
         return $this->repository->find($id);
     }
 
-    public function create(array $user)
+    public function store($user)
     {
-        return $this->repository->create($user);
+        return $this->repository->store($user);
 
     }
 
-    public function update($id, $user)
+    public function update($id = null, $users = [])
     {
-        return $this->repository->update($id, $user);
+        return $this->repository->edit($id, $users);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        return $this->repository->deleteUser($id);
-    }
-    public function search ($user)
-    {
+        return $this->repository->destroy($id);
 
     }
 }

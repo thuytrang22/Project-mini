@@ -4,15 +4,14 @@ namespace App\core\Service;
 
 interface IUserService
 {
-    public function paginate();
+    public function getAll($keywords);
 
     public function find($id);
 
-    public function create(array $user);
+    public function store($user);
 
-    public function update($id, array $user);
+    public function update($id, $users);
 
     public function destroy($id);
 
-    public function search($user);
 }
