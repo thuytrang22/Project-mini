@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
-use App\core\Repositories\IUserRepository;
 use App\core\Service\UserRepository;
+use core\Repositories\IStudentRepository;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(IUserRepository::class, UserRepository::class);
+        $this->app->bind(IStudentRepository::class, UserRepository::class);
     }
 
     /**

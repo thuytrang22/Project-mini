@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
-Route::resource('users',UserController::class);
+Auth::routes();
+Route::get('/', 'HomeController@index');
+Route::group(['middleware'=>'auth'],function (){
+   Route::resource('student', StudentController::class);
+});
+/*Route::resource('users',UserController::class);*/
 

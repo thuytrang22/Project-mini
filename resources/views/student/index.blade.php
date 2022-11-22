@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-auto">
-                    <a href="{{route('users.create')}}" class="btn btn-primary">
+                    <a href="{{route('student.create')}}" class="btn btn-primary">
                         <i class="fas fe-circle-plus"></i>Create New User
                     </a>
                 </div>
@@ -42,23 +42,25 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <th>Image</th>
                     <th width="280px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @if(count($users) > 0)
-                    @foreach($users as $user)
+                @if(count($students) > 0)
+                    @foreach($students as $student)
                         <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->full_name}}</td>
-                            <td>{{$user->birthday}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->phone}}</td>
-                            <td>{{$user->address}}</td>
+                            <td>{{$student->id}}</td>
+                            <td>{{$student->name}}</td>
+                            <td>{{$student->birthday}}</td>
+                            <td>{{$student->email}}</td>
+                            <td>{{$student->phone}}</td>
+                            <td>{{$student->address}}</td>
+                            <td>{{$student->image}}</td>
                             <td>
-                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                    <a class="btn btn-info" href="{{route('users.show',$user->id)}}">Show</a>
-                                    <a class="btn btn-info" href="{{route('users.edit',$user->id)}}">Edit</a>
+                                <form action="{{ route('student.destroy',$student->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{route('student.show',$student->id)}}">Show</a>
+                                    <a class="btn btn-info" href="{{route('student.edit',$student->id)}}">Edit</a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-info">Delete</button>

@@ -1,15 +1,16 @@
 <?php
 
-namespace Core\Providers;
+namespace core\Providers;
 
-use App\core\Service\UserService;
-use App\core\Service\IUserService;
-use App\core\Repositories\IUserRepository;
+use core\Repositories\IStudentRepository;
+use core\Repositories\StudentRepository;
+use core\Service\IStudentService;
+use core\Service\StudentService;
 use Illuminate\Support\ServiceProvider;
-use App\core\Repositories\UserRepository;
 
 class CoreServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -27,7 +28,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(IUserRepository::class, UserRepository::class);
-        $this->app->bind(IUserService::class, UserService::class);
+        $this->app->bind(IStudentRepository::class, StudentRepository::class);
+        $this->app->bind(IStudentService::class, StudentService::class);
+
     }
 }
